@@ -5,13 +5,15 @@
 #include <vector>
 #include "diagnostic_data.hpp"
 
+using TimePoint = std::chrono::system_clock::time_point;
+
 namespace autocore {
 namespace diagnostics {
 
 struct CANMessage {
     uint32_t id;
     std::vector<uint8_t> data;
-    std::chrono::system_clock::time_point timestamp;
+    TimePoint timestamp;
 };
 
 class CANBusMonitor {

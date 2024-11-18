@@ -39,6 +39,11 @@ private:
     std::shared_ptr<sensors::SensorManager> sensorManager_;
     Route currentRoute_;
     sensors::Position currentPosition_;
+    
+    void updatePosition();
+    bool validateGPSSignal() const;
+    float calculateRouteDistance(const std::vector<sensors::Position>& waypoints) const;
+    std::vector<sensors::Position> optimizeRoute(const std::vector<sensors::Position>& waypoints) const;
 };
 
 } // namespace telematics

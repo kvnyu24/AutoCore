@@ -41,7 +41,7 @@ AutoCore is a comprehensive C++ library for electric vehicle control systems, pr
 - Ninja build system
 - Google Test framework
 
-### Building the Project 
+### Building the Project
 
 #### Clone the repository
 
@@ -64,7 +64,7 @@ cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug
 ninja
 ```
 
-### Our test suite covers all major components:
+### Our test suite covers all major components
 
 ```bash
 cd build

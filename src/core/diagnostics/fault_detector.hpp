@@ -41,6 +41,13 @@ struct Fault {
     }
 };
 
+struct FaultPattern {
+    std::vector<FaultType> sequence;
+    std::chrono::milliseconds timeWindow;
+    FaultSeverity resultingSeverity;
+    std::string description;
+};
+
 class FaultDetector {
 public:
     FaultDetector();

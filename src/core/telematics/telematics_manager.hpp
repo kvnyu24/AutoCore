@@ -4,12 +4,16 @@
 #include <string>
 #include <queue>
 #include "../sensors/sensor_manager.hpp"
-#include "../diagnostics/diagnostic_manager.hpp"
 #include "gps_navigator.hpp"
 #include "cloud_connector.hpp"
 #include "ota_manager.hpp"
+#include "../sensors/sensor_types.hpp"
 
 namespace autocore {
+namespace diagnostics {
+    class DiagnosticManager; // Forward declaration
+}
+
 namespace telematics {
 
 class TelematicsManager {
