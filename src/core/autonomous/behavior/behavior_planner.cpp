@@ -75,11 +75,18 @@ void BehaviorPlanner::updatePredictions() {
     
     predictions_.clear();
     for (const auto& object : stateEstimate.trackedObjects) {
+        // Create TrackedObject properly
+        sensors::TrackedObject trackedObj;
+        trackedObj.id = object.id;
+        trackedObj.position = object.position;
+        trackedObj.velocity = std::abs(object.velocity);  // Convert scalar velocity to double
+        trackedObj.heading = object.heading;
+
         PredictedBehavior prediction{
-            object,                                     // TrackedObject
-            predictTrajectory(object),                 // Trajectory
-            0.8f,                                      // confidence
-            std::chrono::system_clock::now()           // predictionTime
+            trackedObj,                              // Properly constructed TrackedObject
+            predictTrajectory(trackedObj),           // Trajectory
+            0.8f,                                    // confidence
+            std::chrono::system_clock::now()         // predictionTime
         };
         predictions_.push_back(prediction);
     }
