@@ -7,14 +7,14 @@ protected:
     std::shared_ptr<MockSensorManager> sensorManager_;
     std::shared_ptr<MockMotorController> motorController_;
     std::shared_ptr<MockVehicleControlSystem> vcs_;
-    std::unique_ptr<evlib::adas::ADASManager> adas_;
+    std::unique_ptr<autocore::adas::ADASManager> adas_;
 
     void SetUp() override {
         sensorManager_ = std::make_shared<MockSensorManager>();
         motorController_ = std::make_shared<MockMotorController>();
         vcs_ = std::make_shared<MockVehicleControlSystem>();
         
-        adas_ = std::make_unique<evlib::adas::ADASManager>(
+        adas_ = std::make_unique<autocore::adas::ADASManager>(
             sensorManager_, motorController_, vcs_);
     }
 };

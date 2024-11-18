@@ -8,7 +8,7 @@
 #include "behavior/behavior_planner.hpp"
 #include "localization/localization_system.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace autonomous {
 
 class AutonomousManager {
@@ -52,4 +52,4 @@ private:
 };
 
 } // namespace autonomous
-} // namespace evlib
+} // namespace autocore

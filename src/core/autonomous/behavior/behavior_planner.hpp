@@ -6,7 +6,7 @@
 #include "behavior_state.hpp"
 #include "maneuver_planner.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace autonomous {
 
 class BehaviorPlanner {
@@ -40,4 +40,4 @@ private:
 };
 
 } // namespace autonomous
-} // namespace evlib 
+} // namespace autocore 

@@ -2,7 +2,7 @@
 #include <cryptopp/aes.h>
 #include <cryptopp/sha.h>
 
-namespace evlib {
+namespace autocore {
 namespace telematics {
 
 OTAManager::OTAManager(std::shared_ptr<CloudConnector> cloudConnector)
@@ -73,4 +73,4 @@ private:
 };
 
 } // namespace telematics
-} // namespace evlib 
+} // namespace autocore 

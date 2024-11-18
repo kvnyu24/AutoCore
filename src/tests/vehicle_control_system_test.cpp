@@ -9,7 +9,7 @@ protected:
     std::shared_ptr<MockSensorManager> sensorManager_;
     std::shared_ptr<MockTelematicsManager> telematicsManager_;
     std::shared_ptr<MockDiagnosticManager> diagnosticManager_;
-    std::unique_ptr<evlib::vcs::VehicleControlSystem> vcs_;
+    std::unique_ptr<autocore::vcs::VehicleControlSystem> vcs_;
 
     void SetUp() override {
         // Initialize mock components
@@ -20,7 +20,7 @@ protected:
         diagnosticManager_ = std::make_shared<MockDiagnosticManager>();
         
         // Create VCS with mock components
-        vcs_ = std::make_unique<evlib::vcs::VehicleControlSystem>(
+        vcs_ = std::make_unique<autocore::vcs::VehicleControlSystem>(
             bms_, motorController_, sensorManager_, 
             telematicsManager_, diagnosticManager_);
     }

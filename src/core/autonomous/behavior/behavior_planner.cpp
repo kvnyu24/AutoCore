@@ -1,7 +1,7 @@
 #include "behavior_planner.hpp"
 #include <algorithm>
 
-namespace evlib {
+namespace autocore {
 namespace autonomous {
 
 BehaviorPlanner::BehaviorPlanner(
@@ -87,4 +87,4 @@ void BehaviorPlanner::updatePredictions() {
 }
 
 } // namespace autonomous
-} // namespace evlib 
+} // namespace autocore 

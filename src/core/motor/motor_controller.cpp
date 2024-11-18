@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace evlib {
+namespace autocore {
 namespace motor {
 
 MotorController::MotorController(std::shared_ptr<bms::BatteryManager> bms)
@@ -84,4 +84,4 @@ bool MotorController::performSelfTest() {
 }
 
 } // namespace motor
-} // namespace evlib 
+} // namespace autocore 

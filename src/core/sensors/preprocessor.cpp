@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace evlib {
+namespace autocore {
 namespace sensors {
 
 SensorData Preprocessor::process(const RawSensorData& rawData) {
@@ -50,4 +50,4 @@ SensorData Preprocessor::normalizeData(const SensorData& data) {
 }
 
 } // namespace sensors
-} // namespace evlib 
+} // namespace autocore 

@@ -7,14 +7,14 @@ protected:
     std::shared_ptr<MockBatteryManager> bms_;
     std::shared_ptr<MockMotorController> motorController_;
     std::shared_ptr<MockSensorManager> sensorManager_;
-    std::unique_ptr<evlib::diagnostics::DiagnosticManager> diagnosticManager_;
+    std::unique_ptr<autocore::diagnostics::DiagnosticManager> diagnosticManager_;
 
     void SetUp() override {
         bms_ = std::make_shared<MockBatteryManager>();
         motorController_ = std::make_shared<MockMotorController>();
         sensorManager_ = std::make_shared<MockSensorManager>();
         
-        diagnosticManager_ = std::make_unique<evlib::diagnostics::DiagnosticManager>(
+        diagnosticManager_ = std::make_unique<autocore::diagnostics::DiagnosticManager>(
             bms_, motorController_, sensorManager_);
     }
 };

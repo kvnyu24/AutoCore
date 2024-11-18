@@ -7,7 +7,7 @@
 #include "../telematics/telematics_manager.hpp"
 #include "../diagnostics/diagnostic_manager.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace vcs {
 
 class VehicleControlSystem {
@@ -58,4 +58,4 @@ private:
 };
 
 } // namespace vcs
-} // namespace evlib
+} // namespace autocore

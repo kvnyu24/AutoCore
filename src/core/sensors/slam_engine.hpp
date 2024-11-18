@@ -5,7 +5,7 @@
 #include "map.hpp"
 #include "position.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace sensors {
 
 class SLAMEngine {
@@ -35,4 +35,4 @@ private:
 };
 
 } // namespace sensors
-} // namespace evlib 
+} // namespace autocore 

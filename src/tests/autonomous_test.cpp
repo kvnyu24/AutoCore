@@ -7,14 +7,14 @@ protected:
     std::shared_ptr<MockADASManager> adasManager_;
     std::shared_ptr<MockFusionEngine> fusionEngine_;
     std::shared_ptr<MockVehicleControlSystem> vcs_;
-    std::unique_ptr<evlib::autonomous::AutonomousManager> autonomousManager_;
+    std::unique_ptr<autocore::autonomous::AutonomousManager> autonomousManager_;
 
     void SetUp() override {
         adasManager_ = std::make_shared<MockADASManager>();
         fusionEngine_ = std::make_shared<MockFusionEngine>();
         vcs_ = std::make_shared<MockVehicleControlSystem>();
         
-        autonomousManager_ = std::make_unique<evlib::autonomous::AutonomousManager>(
+        autonomousManager_ = std::make_unique<autocore::autonomous::AutonomousManager>(
             adasManager_, fusionEngine_, vcs_);
     }
 };

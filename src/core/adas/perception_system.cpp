@@ -1,7 +1,7 @@
 #include "perception_system.hpp"
 #include <algorithm>
 
-namespace evlib {
+namespace autocore {
 namespace adas {
 
 PerceptionSystem::PerceptionSystem(std::shared_ptr<sensors::SensorManager> sensorManager)
@@ -60,4 +60,4 @@ void PerceptionSystem::updateObjectTracking() {
 }
 
 } // namespace adas
-} // namespace evlib 
+} // namespace autocore 

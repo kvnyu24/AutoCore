@@ -4,7 +4,7 @@
 #include "path_planner.hpp"
 #include "../vcs/vehicle_control_system.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace adas {
 
 class DecisionMaker {
@@ -30,4 +30,4 @@ private:
 };
 
 } // namespace adas
-} // namespace evlib 
+} // namespace autocore 

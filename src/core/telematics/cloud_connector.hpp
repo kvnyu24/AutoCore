@@ -5,7 +5,7 @@
 #include "mqtt_client.hpp"
 #include "security_manager.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace telematics {
 
 class CloudConnector {
@@ -36,4 +36,4 @@ private:
 };
 
 } // namespace telematics
-} // namespace evlib 
+} // namespace autocore 

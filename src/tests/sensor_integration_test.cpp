@@ -3,10 +3,10 @@
 
 class SensorIntegrationTest : public ::testing::Test {
 protected:
-    std::unique_ptr<evlib::sensors::SensorManager> sensorManager_;
+    std::unique_ptr<autocore::sensors::SensorManager> sensorManager_;
 
     void SetUp() override {
-        sensorManager_ = std::make_unique<evlib::sensors::SensorManager>();
+        sensorManager_ = std::make_unique<autocore::sensors::SensorManager>();
         // Register test sensors
         sensorManager_->registerSensor("lidar1", SensorType::LIDAR);
         sensorManager_->registerSensor("camera1", SensorType::CAMERA);

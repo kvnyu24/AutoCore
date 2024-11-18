@@ -5,15 +5,15 @@
 class TelematicsTest : public ::testing::Test {
 protected:
     std::shared_ptr<MockCloudService> cloudService_;
-    std::shared_ptr<evlib::sensors::SensorManager> sensorManager_;
-    std::shared_ptr<evlib::diagnostics::DiagnosticManager> diagnosticManager_;
-    std::unique_ptr<evlib::telematics::TelematicsManager> telematicsManager_;
+    std::shared_ptr<autocore::sensors::SensorManager> sensorManager_;
+    std::shared_ptr<autocore::diagnostics::DiagnosticManager> diagnosticManager_;
+    std::unique_ptr<autocore::telematics::TelematicsManager> telematicsManager_;
 
     void SetUp() override {
         cloudService_ = std::make_shared<MockCloudService>();
-        sensorManager_ = std::make_shared<evlib::sensors::SensorManager>();
-        diagnosticManager_ = std::make_shared<evlib::diagnostics::DiagnosticManager>();
-        telematicsManager_ = std::make_unique<evlib::telematics::TelematicsManager>(
+        sensorManager_ = std::make_shared<autocore::sensors::SensorManager>();
+        diagnosticManager_ = std::make_shared<autocore::diagnostics::DiagnosticManager>();
+        telematicsManager_ = std::make_unique<autocore::telematics::TelematicsManager>(
             sensorManager_, diagnosticManager_);
     }
 };

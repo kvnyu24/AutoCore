@@ -1,7 +1,7 @@
 #include "trajectory_planner.hpp"
 #include <algorithm>
 
-namespace evlib {
+namespace autocore {
 namespace autonomous {
 
 TrajectoryPlanner::TrajectoryPlanner(
@@ -64,4 +64,4 @@ bool TrajectoryPlanner::validateTrajectory(
 }
 
 } // namespace autonomous
-} // namespace evlib
+} // namespace autocore

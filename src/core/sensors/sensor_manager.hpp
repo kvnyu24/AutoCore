@@ -7,7 +7,7 @@
 #include "calibration_manager.hpp"
 #include "fusion_engine.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace sensors {
 
 class SensorManager {
@@ -45,4 +45,4 @@ private:
 };
 
 } // namespace sensors
-} // namespace evlib 
+} // namespace autocore 

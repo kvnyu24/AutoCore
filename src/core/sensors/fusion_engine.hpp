@@ -4,7 +4,7 @@
 #include "sensor_data.hpp"
 #include "kalman_filter.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace sensors {
 
 class FusionEngine {
@@ -32,4 +32,4 @@ private:
 };
 
 } // namespace sensors
-} // namespace evlib 
+} // namespace autocore 

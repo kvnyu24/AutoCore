@@ -8,7 +8,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-echo "Setting up EV Library development environment..."
+echo "Setting up AutoCore Library development environment..."
 
 # Check for required tools
 check_dependency() {
@@ -88,7 +88,7 @@ main() {
     setup_git_hooks
     
     echo -e "${GREEN}Setup completed successfully!${NC}"
-    echo "You can now start developing with the EV Library."
+    echo "You can now start developing with the AutoCore Library."
 }
 
 main 

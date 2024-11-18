@@ -5,7 +5,7 @@
 #include "battery_state.hpp"
 #include "thermal_manager.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace bms {
 
 class BatteryManager {
@@ -39,4 +39,4 @@ private:
 };
 
 } // namespace bms
-} // namespace evlib 
+} // namespace autocore 

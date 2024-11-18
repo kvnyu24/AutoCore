@@ -6,13 +6,13 @@ class BehaviorPlannerTest : public ::testing::Test {
 protected:
     std::shared_ptr<MockFusionEngine> fusionEngine_;
     std::shared_ptr<MockSLAMEngine> slamEngine_;
-    std::unique_ptr<evlib::autonomous::BehaviorPlanner> behaviorPlanner_;
+    std::unique_ptr<autocore::autonomous::BehaviorPlanner> behaviorPlanner_;
 
     void SetUp() override {
         fusionEngine_ = std::make_shared<MockFusionEngine>();
         slamEngine_ = std::make_shared<MockSLAMEngine>();
         
-        behaviorPlanner_ = std::make_unique<evlib::autonomous::BehaviorPlanner>(
+        behaviorPlanner_ = std::make_unique<autocore::autonomous::BehaviorPlanner>(
             fusionEngine_, slamEngine_);
     }
 };

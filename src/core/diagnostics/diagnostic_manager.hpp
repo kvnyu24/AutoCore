@@ -10,7 +10,7 @@
 #include "fault_detector.hpp"
 #include "health_monitor.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace diagnostics {
 
 class DiagnosticManager {
@@ -57,4 +57,4 @@ private:
 };
 
 } // namespace diagnostics
-} // namespace evlib 
+} // namespace autocore 

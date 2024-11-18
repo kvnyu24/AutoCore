@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace evlib {
+namespace autocore {
 namespace diagnostics {
 
 FaultDetector::FaultDetector() {
@@ -83,4 +83,4 @@ private:
 };
 
 } // namespace diagnostics
-} // namespace evlib 
+} // namespace autocore 

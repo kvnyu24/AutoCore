@@ -5,7 +5,7 @@
 #include "component_health.hpp"
 #include "predictive_model.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace diagnostics {
 
 class HealthMonitor {
@@ -34,4 +34,4 @@ private:
 };
 
 } // namespace diagnostics
-} // namespace evlib 
+} // namespace autocore 

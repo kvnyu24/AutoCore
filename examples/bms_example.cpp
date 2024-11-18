@@ -1,7 +1,7 @@
-#include "battery_manager.hpp"
+#include "../src/core/bms/battery_manager.hpp"
 
 int main() {
-    evlib::bms::BatteryManager bms;
+    autocore::bms::BatteryManager bms;
     
     // Configure thermal limits
     bms.setThermalLimits(0.0f, 45.0f);

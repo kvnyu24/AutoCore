@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace evlib {
+namespace autocore {
 namespace vcs {
 
 VehicleControlSystem::VehicleControlSystem(
@@ -85,4 +85,4 @@ void VehicleControlSystem::processSystemAlerts() {
 }
 
 } // namespace vcs
-} // namespace evlib
+} // namespace autocore

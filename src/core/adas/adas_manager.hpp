@@ -8,7 +8,7 @@
 #include "path_planner.hpp"
 #include "decision_maker.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace adas {
 
 class ADASManager {
@@ -53,4 +53,4 @@ private:
 };
 
 } // namespace adas
-} // namespace evlib 
+} // namespace autocore 

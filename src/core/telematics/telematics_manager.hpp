@@ -9,7 +9,7 @@
 #include "cloud_connector.hpp"
 #include "ota_manager.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace telematics {
 
 class TelematicsManager {
@@ -54,4 +54,4 @@ private:
 };
 
 } // namespace telematics
-} // namespace evlib 
+} // namespace autocore 

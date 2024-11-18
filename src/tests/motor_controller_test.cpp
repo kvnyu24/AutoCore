@@ -4,12 +4,12 @@
 
 class MotorControllerTest : public ::testing::Test {
 protected:
-    std::shared_ptr<evlib::bms::BatteryManager> bms_;
-    std::unique_ptr<evlib::motor::MotorController> motor_;
+    std::shared_ptr<autocore::bms::BatteryManager> bms_;
+    std::unique_ptr<autocore::motor::MotorController> motor_;
 
     void SetUp() override {
-        bms_ = std::make_shared<evlib::bms::BatteryManager>();
-        motor_ = std::make_unique<evlib::motor::MotorController>(bms_);
+        bms_ = std::make_shared<autocore::bms::BatteryManager>();
+        motor_ = std::make_unique<autocore::motor::MotorController>(bms_);
     }
 };
 

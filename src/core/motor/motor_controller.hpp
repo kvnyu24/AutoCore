@@ -6,7 +6,7 @@
 #include "inverter_controller.hpp"
 #include "../bms/battery_manager.hpp"
 
-namespace evlib {
+namespace autocore {
 namespace motor {
 
 class MotorController {
@@ -50,4 +50,4 @@ private:
 };
 
 } // namespace motor
-} // namespace evlib 
+} // namespace autocore 
