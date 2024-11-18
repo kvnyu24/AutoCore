@@ -6,6 +6,8 @@
 #include "sensor_types.hpp"
 #include "calibration_manager.hpp"
 #include "fusion_engine.hpp"
+#include "sensor.hpp"
+#include "map.hpp"
 
 namespace autocore {
 namespace sensors {

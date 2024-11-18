@@ -3,6 +3,7 @@
 #include <vector>
 #include "sensor_data.hpp"
 #include "kalman_filter.hpp"
+#include "fusion_types.hpp"
 
 namespace autocore {
 namespace sensors {
@@ -21,9 +22,9 @@ public:
     // Configuration
     void setFusionParameters(const FusionParameters& params);
     void enableSensor(SensorType type, bool enabled);
-
+    
 private:
-    std::unique_ptr<KalmanFilter> kalmanFilter_;
+    std::unique_ptr<KalmanFilter<double>> kalmanFilter_;
     FusionParameters params_;
     std::vector<SensorType> enabledSensors_;
     
