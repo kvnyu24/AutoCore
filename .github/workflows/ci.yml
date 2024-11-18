@@ -1,0 +1,64 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build clang-tidy clang-format
+        
+    - name: Configure CMake
+      run: |
+        mkdir build
+        cd build
+        cmake .. -GNinja \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DBUILD_TESTING=ON \
+          -DENABLE_COVERAGE=ON
+          
+    - name: Build
+      run: |
+        cd build
+        ninja
+        
+    - name: Run Tests
+      run: |
+        cd build
+        ctest --output-on-failure
+        
+    - name: Static Analysis
+      run: |
+        cd build
+        ninja clang-tidy-check
+        
+    - name: Code Coverage
+      run: |
+        cd build
+        ninja coverage-report
+        
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check formatting
+      run: |
+        find src -name '*.cpp' -o -name '*.hpp' | \
+        xargs clang-format --style=file -i --dry-run -Werror
+        
+    - name: CPPCheck
+      run: |
+        sudo apt-get install -y cppcheck
+        cppcheck --enable=all --error-exitcode=1 src/ 
