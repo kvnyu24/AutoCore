@@ -1,5 +1,7 @@
 #include "trajectory_planner.hpp"
 #include <algorithm>
+#include "../../sensors/fusion_engine.hpp"
+#include "a_star.hpp"
 
 namespace autocore {
 namespace autonomous {
@@ -14,18 +16,22 @@ TrajectoryPlanner::TrajectoryPlanner(
 }
 
 Trajectory TrajectoryPlanner::planTrajectory(
-    const Position& currentPos,
-    const Position& destination,
+    const sensors::Position& currentPos,
+    const sensors::Position& destination,
     const std::vector<Obstacle>& obstacles) {
     
     // Get current state estimate from fusion engine
     // See src/core/sensors/fusion_engine.hpp lines 19-20
     auto currentState = fusionEngine_->getStateEstimate();
     
+    obstacles_ = obstacles;
+    
     // Generate trajectory
     Trajectory trajectory;
     trajectory.waypoints = generateWaypoints(currentPos, destination);
-    trajectory.speed = calculateOptimalSpeed(trajectory.waypoints, obstacles);
+    for (auto& waypoint : trajectory.waypoints) {
+        waypoint.speed = calculateOptimalSpeed(trajectory.waypoints, obstacles);
+    }
     
     // Validate trajectory safety
     if (!validateTrajectory(trajectory, obstacles)) {
@@ -36,13 +42,13 @@ Trajectory TrajectoryPlanner::planTrajectory(
 }
 
 std::vector<Waypoint> TrajectoryPlanner::generateWaypoints(
-    const Position& start,
-    const Position& end) {
+    const sensors::Position& start,
+    const sensors::Position& end) {
     
     std::vector<Waypoint> waypoints;
     
     // Use A* algorithm for path planning
-    auto path = astar_.findPath(start, end);
+    auto path = astar_.findPath(start, end, obstacles_);
     
     // Smooth path using cubic spline interpolation
     waypoints = smoothPath(path);
