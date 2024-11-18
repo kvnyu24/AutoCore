@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <chrono>
+#include "fusion_types.hpp"
 
 namespace autocore {
 namespace sensors {
@@ -40,7 +41,7 @@ struct StateEstimate {
     std::vector<float> acceleration;
     std::vector<float> orientation;
     std::vector<float> angularVelocity;
-    std::vector<float> trackedObjects;
+    std::vector<TrackedObject> trackedObjects; 
     std::chrono::system_clock::time_point timestamp;
 };
 
