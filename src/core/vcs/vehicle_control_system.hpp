@@ -1,6 +1,9 @@
 #pragma once
 
 #include <memory>
+#include <string>
+#include <chrono>
+#include <vector>
 #include "../bms/battery_manager.hpp"
 #include "../motor/motor_controller.hpp"
 #include "../sensors/sensor_manager.hpp"
@@ -9,6 +12,34 @@
 
 namespace autocore {
 namespace vcs {
+
+enum class DrivingMode {
+    NORMAL,
+    SPORT,
+    ECONOMY,
+    EMERGENCY
+};
+
+enum class AlertSeverity {
+    LOW,
+    MEDIUM,
+    HIGH,
+    CRITICAL
+};
+
+struct VehicleState {
+    float speed;
+    float acceleration;
+    float batteryLevel;
+    float temperature;
+};
+
+struct SafetyAlert {
+    std::string message;
+    AlertSeverity severity;
+    std::chrono::system_clock::time_point timestamp;
+    bool isActive{true};
+};
 
 class VehicleControlSystem {
 public:
@@ -28,17 +59,17 @@ public:
     // Performance management
     void optimizePerformance();
     void setEconomyMode(bool enabled);
-    float getEstimatedRange() const;
+    float getEstimatedRange();
     
     // Safety systems
     bool performSystemCheck();
     void enableEmergencyMode();
-    std::vector<SafetyAlert> getActiveAlerts() const;
+    std::vector<SafetyAlert> getActiveAlerts();
     
     // Vehicle dynamics
     void setTargetSpeed(float speedKmh);
     void setTargetAcceleration(float accelerationMs2);
-    VehicleState getCurrentState() const;
+    VehicleState getCurrentState();
 
 private:
     std::shared_ptr<bms::BatteryManager> bms_;

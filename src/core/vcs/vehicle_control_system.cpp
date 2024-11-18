@@ -5,6 +5,7 @@
 namespace autocore {
 namespace vcs {
 
+
 VehicleControlSystem::VehicleControlSystem(
     std::shared_ptr<bms::BatteryManager> bms,
     std::shared_ptr<motor::MotorController> motorController,
