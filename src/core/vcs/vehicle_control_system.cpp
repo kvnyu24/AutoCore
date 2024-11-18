@@ -90,7 +90,7 @@ float VehicleControlSystem::calculateOptimalPowerDistribution() {
 
 void VehicleControlSystem::processSystemAlerts() {
     auto diagnostics = diagnosticManager_->getSystemHealth();
-    if (diagnostics.severity >= AlertSeverity::HIGH) {
+    if (diagnostics.systemStatus == diagnostics::HealthStatus::CRITICAL) {
         enableEmergencyMode();
     }
 }
