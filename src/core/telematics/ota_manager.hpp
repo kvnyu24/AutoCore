@@ -46,7 +46,7 @@ public:
     bool checkForUpdates();
     bool downloadUpdate();
     bool installUpdate();
-    UpdateStatus getUpdateStatus() const;
+    UpdateStatus getUpdateStatus() const { return currentStatus_; }
     
     // Update configuration
     void setUpdatePolicy(bool autoDownload, bool autoInstall);
@@ -68,12 +68,14 @@ private:
     UpdateState currentState_;
     UpdateInfo currentUpdate_;
     std::string backupPath_;
+    UpdateStatus currentStatus_;
     
     bool downloadUpdateChunks();
     bool validateSecureBootchain();
     bool performInstallation();
     void processUpdateMetadata(const Message& response);
     bool verifySystemCompatibility();
+    void updateProgress(float progress);
 };
 
 } // namespace telematics
