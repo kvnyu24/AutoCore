@@ -48,5 +48,7 @@ struct DiagnosticReport {
     std::chrono::system_clock::time_point generationTime;
     
     bool hasIssues() const {
-        return st
-}
+        return systemHealth.systemStatus != HealthStatus::HEALTHY || 
+               !componentHealthStates.empty();
+    }
+};
