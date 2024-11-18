@@ -5,7 +5,6 @@
 namespace autocore {
 namespace vcs {
 
-
 VehicleControlSystem::VehicleControlSystem(
     std::shared_ptr<bms::BatteryManager> bms,
     std::shared_ptr<motor::MotorController> motorController,
@@ -19,6 +18,17 @@ VehicleControlSystem::VehicleControlSystem(
     , diagnosticManager_(std::move(diagnosticManager))
     , currentMode_(DrivingMode::NORMAL)
     , economyModeEnabled_(false) {
+    
+    // Initialize vehicle state
+    currentState_ = VehicleState{
+        .speed = 0.0f,
+        .acceleration = 0.0f,
+        .batteryLevel = bms_->getStateOfCharge(),
+        .temperature = motorController_->getTemperature()
+    };
+    
+    // Perform initial system check
+    performSystemCheck();
 }
 
 void VehicleControlSystem::executeControlLoop() {

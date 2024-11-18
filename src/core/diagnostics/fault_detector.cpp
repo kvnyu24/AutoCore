@@ -5,7 +5,7 @@
 namespace autocore {
 namespace diagnostics {
 
-FaultDetector::FaultDetector() {
+FaultDetector::FaultDetector() : mlModel_(std::make_unique<ml::AnomalyDetector>()) {
     initializeFaultPatterns();
     loadMachineLearningModel();
 }
@@ -68,19 +68,65 @@ void FaultDetector::detectAnomalies(
     }
 }
 
-private:
-    void processFaults(std::vector<Fault>& faults) {
-        // Remove duplicates
-        std::sort(faults.begin(), faults.end());
-        faults.erase(std::unique(faults.begin(), faults.end()), faults.end());
+void FaultDetector::processFaults(std::vector<Fault>& faults) {
+    // Remove duplicates
+    std::sort(faults.begin(), faults.end());
+    faults.erase(std::unique(faults.begin(), faults.end()), faults.end());
+    
+    // Prioritize by severity
+    std::sort(faults.begin(), faults.end(), 
+        [](const Fault& a, const Fault& b) {
+            return a.severity > b.severity;
+        });
+}
+
+void FaultDetector::detectPatternBasedFaults(
+    const DiagnosticData& data,
+    std::vector<Fault>& faults) {
+    
+    // Check each fault pattern
+    for (const auto& pattern : faultPatterns_) {
+        // Check if current faults match pattern sequence
+        bool patternMatch = true;
+        auto currentTime = data.timestamp;
         
-        // Prioritize by severity
-        std::sort(faults.begin(), faults.end(), 
-            [](const Fault& a, const Fault& b) {
-                return a.severity > b.severity;
+        for (const auto& faultType : pattern.sequence) {
+            // Check if this fault type exists within time window
+            bool foundFault = std::any_of(faults.begin(), faults.end(),
+                [&](const Fault& fault) {
+                    return fault.type == faultType &&
+                           (currentTime - fault.timestamp) <= pattern.timeWindow;
+                });
+                
+            if (!foundFault) {
+                patternMatch = false;
+                break;
+            }
+        }
+        
+        // If pattern matches, add composite fault
+        if (patternMatch) {
+            faults.push_back(Fault{
+                FaultType::ANOMALY_DETECTED,
+                pattern.description,
+                data.timestamp,
+                pattern.resultingSeverity
             });
+        }
     }
-};
+}
+
+void FaultDetector::initializeFaultPatterns() {
+    // Initialize default fault patterns
+    faultPatterns_.clear();
+    // Add patterns as needed
+}
+
+void FaultDetector::loadMachineLearningModel() {
+    // Load and initialize ML model
+    mlModel_->loadModel("path/to/model");
+    // Configure model parameters as needed
+}
 
 } // namespace diagnostics
 } // namespace autocore 

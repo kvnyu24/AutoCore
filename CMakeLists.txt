@@ -16,6 +16,8 @@ target_link_libraries(behavior_planner_test
     PRIVATE
     GTest::GTest
     GTest::Main
+    GTest::gmock
+    GTest::gmock_main
 )
 
 target_include_directories(behavior_planner_test PRIVATE

@@ -7,17 +7,27 @@ namespace autocore {
 namespace sensors {
 
 struct Feature {
-    Position position;
-    float confidence;
-    int id;
-    std::vector<float> descriptor;
+    double x;
+    double y;
+    double confidence;
+    uint32_t id;
 };
 
 struct FusionParameters {
-    float processNoise;
-    float measurementNoise;
-    float confidenceThreshold;
-    int maxFeatures;
+    double sensorWeight;
+    double timeWindow;
+    double confidenceThreshold;
+};
+
+struct TrackedObject {
+    uint32_t id;
+    Position position;
+    double velocity;
+    double heading;
+    
+    TrackedObject(const Feature& feature) {
+        // Initialize from feature
+    }
 };
 
 template<typename State, typename Measurement>
