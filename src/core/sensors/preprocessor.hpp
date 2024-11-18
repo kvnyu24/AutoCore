@@ -15,8 +15,12 @@ public:
     SensorData process(const RawSensorData& rawData);
 
     // Set calibration parameters
-    void setCalibrationMatrix(const std::vector<float>& matrix) { calibrationMatrix_ = matrix; }
+    void setCalibrationMatrix(const std::vector<std::vector<float>>& matrix) { calibrationMatrix_ = matrix; }
     void setDataRange(float min, float max) { dataMin_ = min; dataMax_ = max; }
+
+    std::vector<float> applyCalibrationMatrix(
+        const std::vector<float>& values,
+        const std::vector<std::vector<float>>& matrix);
 
 private:
     // Processing steps
@@ -26,7 +30,7 @@ private:
     SensorData applyTemporalFilter(const SensorData& current, const SensorData& previous);
 
     // Calibration parameters
-    std::vector<float> calibrationMatrix_;
+    std::vector<std::vector<float>> calibrationMatrix_;
     float dataMin_{0.0f};
     float dataMax_{1.0f};
     std::optional<SensorData> previousData_;

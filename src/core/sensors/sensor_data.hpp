@@ -21,6 +21,13 @@ struct SensorData {
     bool isValid{true};
 };
 
+struct RawSensorData {
+    SensorType type;
+    std::chrono::system_clock::time_point timestamp;
+    std::vector<float> rawValues;
+    bool isValid{true};
+};
+
 struct FusedData {
     std::vector<SensorData> sensorInputs;
     std::chrono::system_clock::time_point timestamp;

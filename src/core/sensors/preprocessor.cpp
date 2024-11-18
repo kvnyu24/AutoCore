@@ -49,5 +49,18 @@ SensorData Preprocessor::normalizeData(const SensorData& data) {
     return normalized;
 }
 
+std::vector<float> Preprocessor::applyCalibrationMatrix(
+    const std::vector<float>& values,
+    const std::vector<std::vector<float>>& matrix) {
+    std::vector<float> result(values.size());
+    for (size_t i = 0; i < values.size(); ++i) {
+        result[i] = 0;
+        for (size_t j = 0; j < values.size(); ++j) {
+            result[i] += matrix[i][j] * values[j];
+        }
+    }
+    return result;
+}
+
 } // namespace sensors
 } // namespace autocore 
