@@ -8,18 +8,20 @@
 namespace autocore {
 namespace ml {
 
+using diagnostics::DiagnosticData;
+
 class AnomalyDetector {
 public:
     AnomalyDetector();
     ~AnomalyDetector() = default;
 
     // Core prediction methods
-    bool predictAnomaly(const diagnostics::DiagnosticData& data);
-    float getAnomalyScore(const diagnostics::DiagnosticData& data) const;
+    bool predictAnomaly(const DiagnosticData& data);
+    float getAnomalyScore(const DiagnosticData& data) const;
     
     // Model management
-    void trainModel(const std::vector<diagnostics::DiagnosticData>& trainingData);
-    void updateModel(const diagnostics::DiagnosticData& newData);
+    void trainModel(const std::vector<DiagnosticData>& trainingData);
+    void updateModel(const DiagnosticData& newData);
     void loadModel(const std::string& modelPath);
     void saveModel(const std::string& modelPath) const;
 
@@ -28,7 +30,7 @@ public:
     void setModelParameters(const ModelConfig& config) { modelConfig_ = config; }
     
     // Feature extraction
-    std::vector<float> extractFeatures(const diagnostics::DiagnosticData& data) const;
+    std::vector<float> extractFeatures(const DiagnosticData& data) const;
     void normalizeFeatures(std::vector<float>& features) const;
 
 private:
@@ -39,7 +41,7 @@ private:
     std::vector<float> featureStdDevs_;
 
     // Internal methods
-    bool validateData(const diagnostics::DiagnosticData& data) const;
+    bool validateData(const DiagnosticData& data) const;
     void updateFeatureStatistics(const std::vector<float>& features);
     float calculateMahalanobisDistance(const std::vector<float>& features) const;
 };

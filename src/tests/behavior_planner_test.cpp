@@ -2,17 +2,20 @@
 #include "../core/autonomous/behavior/behavior_planner.hpp"
 #include "mock_components.hpp"
 
+using namespace autocore::sensors;
+using namespace autocore::autonomous;
+
 class BehaviorPlannerTest : public ::testing::Test {
 protected:
-    std::shared_ptr<MockFusionEngine> fusionEngine_;
-    std::shared_ptr<MockSLAMEngine> slamEngine_;
-    std::unique_ptr<autocore::autonomous::BehaviorPlanner> behaviorPlanner_;
+    std::shared_ptr<autocore::tests::MockFusionEngine> fusionEngine_;
+    std::shared_ptr<autocore::tests::MockSLAMEngine> slamEngine_;
+    std::unique_ptr<BehaviorPlanner> behaviorPlanner_;
 
     void SetUp() override {
-        fusionEngine_ = std::make_shared<MockFusionEngine>();
-        slamEngine_ = std::make_shared<MockSLAMEngine>();
+        fusionEngine_ = std::make_shared<autocore::tests::MockFusionEngine>();
+        slamEngine_ = std::make_shared<autocore::tests::MockSLAMEngine>();
         
-        behaviorPlanner_ = std::make_unique<autocore::autonomous::BehaviorPlanner>(
+        behaviorPlanner_ = std::make_unique<BehaviorPlanner>(
             fusionEngine_, slamEngine_);
     }
 };
