@@ -14,13 +14,9 @@ BehaviorPlanner::BehaviorPlanner(
 
 BehaviorState BehaviorPlanner::planBehavior(const SceneContext& context) {
     // Get current state estimate from fusion engine
-    // Reference to FusionEngine interface:
-    // See src/core/sensors/fusion_engine.hpp lines 18-19
     auto stateEstimate = fusionEngine_->getStateEstimate();
     
     // Get current map and position from SLAM
-    // Reference to SLAMEngine interface:
-    // See src/core/sensors/slam_engine.hpp lines 17-18
     auto currentPosition = slamEngine_->getEstimatedPosition();
     auto currentMap = slamEngine_->getCurrentMap();
     
@@ -36,7 +32,8 @@ BehaviorState BehaviorPlanner::planBehavior(const SceneContext& context) {
     
     for (const auto& maneuver : possibleManeuvers) {
         if (validateManeuver(maneuver)) {
-            float score = evaluateManeuver(maneuver);
+            // Use maneuverPlanner's evaluation method
+            float score = maneuverPlanner_->evaluateManeuver(maneuver);
             if (score > bestScore) {
                 bestScore = score;
                 bestManeuver = maneuver;
@@ -74,16 +71,62 @@ bool BehaviorPlanner::validateManeuver(const Maneuver& maneuver) {
 }
 
 void BehaviorPlanner::updatePredictions() {
-    // Get tracked objects from fusion engine
     auto stateEstimate = fusionEngine_->getStateEstimate();
     
     predictions_.clear();
     for (const auto& object : stateEstimate.trackedObjects) {
-        PredictedBehavior prediction;
-        prediction.object = object;
-        prediction.trajectory = predictTrajectory(object);
+        PredictedBehavior prediction{
+            object,                                     // TrackedObject
+            predictTrajectory(object),                 // Trajectory
+            0.8f,                                      // confidence
+            std::chrono::system_clock::now()           // predictionTime
+        };
         predictions_.push_back(prediction);
     }
+}
+
+Trajectory BehaviorPlanner::predictTrajectory(const sensors::TrackedObject& object) {
+    Trajectory trajectory;
+    const float predictionTime = 5.0f;  // 5 seconds prediction horizon
+    const float timeStep = 0.1f;        // 100ms time step
+    
+    // Initialize trajectory metrics
+    trajectory.totalDistance = 0.0f;
+    trajectory.estimatedTime = predictionTime;
+    
+    // Previous waypoint for distance calculation
+    Waypoint prevWaypoint;
+    bool isFirst = true;
+
+    for (float t = 0; t < predictionTime; t += timeStep) {
+        Waypoint waypoint;
+        
+        // Calculate position based on current velocity and heading
+        float distance = object.velocity * t;
+        waypoint.position.x = object.position.x + distance * std::cos(object.heading);
+        waypoint.position.y = object.position.y + distance * std::sin(object.heading);
+        waypoint.position.z = object.position.z;  // Maintain same z-coordinate
+        
+        // Set waypoint properties
+        waypoint.speed = object.velocity;  // Assume constant velocity
+        waypoint.heading = object.heading;
+        waypoint.curvature = 0.0f;  // Could be calculated based on path
+
+        // Calculate cumulative distance
+        if (!isFirst) {
+            float segmentDistance = std::hypot(
+                waypoint.position.x - prevWaypoint.position.x,
+                waypoint.position.y - prevWaypoint.position.y
+            );
+            trajectory.totalDistance += segmentDistance;
+        }
+
+        trajectory.waypoints.push_back(waypoint);
+        prevWaypoint = waypoint;
+        isFirst = false;
+    }
+    
+    return trajectory;
 }
 
 } // namespace autonomous

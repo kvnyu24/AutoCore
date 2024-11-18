@@ -9,6 +9,13 @@
 namespace autocore {
 namespace autonomous {
 
+struct PredictedBehavior {
+    sensors::TrackedObject object;
+    Trajectory trajectory;
+    float confidence{0.0f};
+    std::chrono::system_clock::time_point predictionTime;
+};
+
 class BehaviorPlanner {
 public:
     BehaviorPlanner(
@@ -33,10 +40,13 @@ private:
     
     BehaviorState currentState_;
     std::vector<PredictedBehavior> predictions_;
+
+    const float RISK_THRESHOLD{0.75f};
     
     void updatePredictions();
     float evaluateRisk(const Maneuver& maneuver);
     bool checkFeasibility(const Maneuver& maneuver);
+    Trajectory predictTrajectory(const sensors::TrackedObject& object);
 };
 
 } // namespace autonomous

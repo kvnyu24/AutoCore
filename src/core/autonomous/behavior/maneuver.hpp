@@ -29,5 +29,26 @@ struct NavigationGoal {
     float arrival_time;
 };
 
+class ManeuverPlanner {
+public:
+    ManeuverPlanner() = default;
+    ~ManeuverPlanner() = default;
+
+    // Core planning functions
+    std::vector<Maneuver> generateManeuvers(const SceneContext& context);
+    Maneuver optimizeManeuver(const Maneuver& maneuver);
+    float evaluateManeuver(const Maneuver& maneuver);
+
+private:
+    // Helper methods for maneuver generation
+    Maneuver generateLaneFollowManeuver(const SceneContext& context);
+    Maneuver generateLaneChangeManeuver(const SceneContext& context, bool isLeft);
+    Maneuver generateStopManeuver(const SceneContext& context);
+    
+    // Utility functions
+    float calculateManeuverCost(const Maneuver& maneuver);
+    float calculateSafetyMargin(const Maneuver& maneuver);
+};
+
 } // namespace autonomous
 } // namespace autocore 

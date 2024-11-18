@@ -25,6 +25,7 @@ struct TrackedObject {
     double velocity;
     double heading;
     
+    TrackedObject() = default;
     TrackedObject(const Feature& feature) {
         // Initialize from feature
     }

@@ -17,6 +17,21 @@ struct Trajectory {
     std::vector<Waypoint> waypoints;
     float totalDistance;
     float estimatedTime;
+
+    bool intersectsWith(const Trajectory& other) const {
+        for (const auto& waypoint : waypoints) {
+            for (const auto& otherWaypoint : other.waypoints) {
+                float distance = std::hypot(
+                    waypoint.position.x - otherWaypoint.position.x,
+                    waypoint.position.y - otherWaypoint.position.y
+                );
+                if (distance < 2.0f) { // Safety threshold in meters
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 };
 
 class TrajectoryPlanner {
