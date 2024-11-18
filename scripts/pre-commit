@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+echo "Running pre-commit checks..."
+
+# Run clang-format on changed files
+check_formatting() {
+    echo "Checking code formatting..."
+    git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(cpp|hpp)$' | \
+    while read file; do
+        clang-format -style=file -i "$file"
+        git add "$file"
+    done
+}
+
+# Run static analysis
+run_static_analysis() {
+    echo "Running static analysis..."
+    cd build
+    ninja clang-tidy
+}
+
+# Run unit tests
+run_tests() {
+    echo "Running unit tests..."
+    cd build
+    ctest --output-on-failure
+}
+
+check_formatting
+run_static_analysis
+run_tests
+
+echo "Pre-commit checks passed!" 

@@ -1,0 +1,54 @@
+# Build directories
+build/
+dist/
+out/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Dependency directories
+vendor/
+node_modules/
+external/
+
+# Compiled files
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+*.a
+*.lib
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Testing artifacts
+Testing/
+test_results/
+coverage/
+
+# Generated documentation
+docs/generated/
+doxygen/
+
+# Logs and temporary files
+*.log
+*.tmp
+core.*
+
+# Environment files
+.env
+.env.local
+
+# Project specific
+simulation_data/
+sensor_logs/
+telemetry_data/
