@@ -88,5 +88,5 @@ namespace vcs {
         void updateTelemetryData();
     };
     
-    };   // namespace vcs
+} // namespace vcs
 } // namespace autocore

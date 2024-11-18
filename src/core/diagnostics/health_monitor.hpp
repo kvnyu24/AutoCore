@@ -8,6 +8,9 @@
 namespace autocore {
 namespace diagnostics {
 
+// Forward declaration
+class PredictiveModel;
+
 class HealthMonitor {
 public:
     HealthMonitor() {
