@@ -1,5 +1,8 @@
 #include <gtest/gtest.h>
 #include "../core/sensors/sensor_manager.hpp"
+#include "../core/sensors/sensor_data.hpp"
+
+using autocore::sensors::SensorType;
 
 class SensorIntegrationTest : public ::testing::Test {
 protected:
@@ -23,7 +26,7 @@ TEST_F(SensorIntegrationTest, SensorRegistration) {
 TEST_F(SensorIntegrationTest, DataFusion) {
     sensorManager_->updateSensorData();
     auto fusedData = sensorManager_->getFusedData();
-    EXPECT_TRUE(fusedData.isValid());
+    EXPECT_TRUE(fusedData.isValid);
 }
 
 TEST_F(SensorIntegrationTest, SLAMOperation) {

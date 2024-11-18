@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../core/telematics/telematics_manager.hpp"
 #include "mock_cloud_service.hpp"
+#include "../core/sensors/sensor_types.hpp"
 
 class TelematicsTest : public ::testing::Test {
 protected:
