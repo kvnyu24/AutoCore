@@ -8,6 +8,12 @@
 namespace autocore {
 namespace autonomous {
 
+struct Trajectory {
+    std::vector<Waypoint> waypoints;
+    float speed;
+    bool isValid{true};
+};
+
 class TrajectoryPlanner {
 public:
     TrajectoryPlanner(std::shared_ptr<sensors::FusionEngine> fusionEngine);

@@ -8,6 +8,8 @@
 #include "cloud_connector.hpp"
 #include "ota_manager.hpp"
 #include "../sensors/sensor_types.hpp"
+#include "../sensors/position.hpp"
+#include "telematics_types.hpp"
 
 namespace autocore {
 namespace diagnostics {
@@ -29,8 +31,8 @@ public:
     bool receiveTelemetryCommands();
     
     // GPS and Navigation
-    Position getCurrentPosition() const;
-    Route calculateRoute(const Position& destination);
+    sensors::Position getCurrentPosition() const;
+    Route calculateRoute(const sensors::Position& destination);
     void updateNavigation();
     
     // OTA Updates

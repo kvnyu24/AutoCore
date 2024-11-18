@@ -4,7 +4,7 @@
 #include "../../sensors/fusion_engine.hpp"
 #include "../../sensors/slam_engine.hpp"
 #include "behavior_state.hpp"
-#include "maneuver_planner.hpp"
+#include "maneuver.hpp"
 
 namespace autocore {
 namespace autonomous {
