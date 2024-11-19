@@ -11,6 +11,15 @@ namespace sensors {
 using common::Position;
 using common::Velocity;
 
+enum class SensorType {
+    LIDAR,
+    CAMERA,
+    RADAR,
+    IMU,
+    GPS,
+    ULTRASONIC
+};
+
 enum class SensorHealthStatus {
     HEALTHY,
     DEGRADED,
@@ -18,22 +27,27 @@ enum class SensorHealthStatus {
     OFFLINE
 };
 
+
 struct SensorHealth {
     SensorHealthStatus status{SensorHealthStatus::HEALTHY};
-    float healthScore{1.0f};  // 0.0 to 1.0
+    float healthScore{1.0f};
     std::chrono::system_clock::time_point lastUpdate;
     std::vector<std::string> diagnosticMessages;
 };
 
 struct SensorData {
-    std::vector<float> values;
+    SensorType type;
     std::chrono::system_clock::time_point timestamp;
+    std::vector<float> values;
     bool isValid{true};
 };
 
 struct StateEstimate {
     Position position;
     Velocity velocity;
+    std::vector<float> acceleration;
+    std::vector<float> orientation;
+    std::vector<float> angularVelocity;
     float uncertainty;
 };
 

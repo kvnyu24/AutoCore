@@ -1,19 +1,19 @@
 #pragma once
 
-#include "../sensors/sensor_types.hpp"
-#include <chrono>
+#include "../../sensors/fusion_types.hpp"
+#include "../../common/types.hpp"
 
 namespace autocore {
 namespace autonomous {
 
 struct SceneContext {
-    std::chrono::system_clock::time_point timestamp;
-    std::vector<sensors::Object> detectedObjects;
-    sensors::LaneInfo laneInfo;
-    sensors::Position currentPosition;
-    sensors::Velocity currentVelocity;
-    
-    // Add any other context information needed
+    std::vector<sensors::TrackedObject> nearbyObjects;
+    std::vector<sensors::Feature> roadFeatures;
+    common::Position currentPosition;
+    common::Position targetPosition;
+    float currentSpeed;
+    float targetSpeed;
+    bool isEmergency{false};
 };
 
 } // namespace autonomous
