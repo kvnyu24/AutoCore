@@ -3,9 +3,12 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include "../../common/types.hpp"
+#include "../common/types.hpp"
 namespace autocore {
 namespace sensors {
+
+using common::Position;
+
 
 struct MapPoint {
     Position position;

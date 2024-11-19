@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <vector>
-#include "../diagnostics/diagnostic_data.hpp"
+#include "../diagnostics/diagnostic_types.hpp"
 #include "model_config.hpp"
 
 namespace autocore {

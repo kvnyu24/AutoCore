@@ -6,6 +6,7 @@
 namespace autocore {
 namespace autonomous {
 
+using common::Position;
 struct Waypoint {
     sensors::Position position;
     float speed;

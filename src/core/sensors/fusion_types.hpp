@@ -7,6 +7,9 @@
 namespace autocore {
 namespace sensors {
 
+using common::Position;
+using common::Velocity;
+
 struct Feature {
     double x;
     double y;

@@ -58,8 +58,6 @@ struct Path {
     std::vector<float> timestamps;
 };
 
-} // namespace common
-
 // Type aliases for backward compatibility
 namespace sensors {
     using Position = common::Position;

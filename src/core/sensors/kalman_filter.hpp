@@ -7,6 +7,9 @@
 namespace autocore {
 namespace sensors {
 
+using common::Position;
+using common::Velocity;
+
 /**
  * @brief Kalman Filter implementation for state estimation
  * 
