@@ -9,7 +9,8 @@
 #include "../core/telematics/telematics_manager.hpp"
 #include "../core/diagnostics/diagnostic_manager.hpp"
 #include "../core/diagnostics/component_health.hpp"
-
+#include "../core/diagnostics/fault_detector.hpp"
+#include "../core/common/types.hpp"
 namespace autocore {
 namespace tests {
 
@@ -46,9 +47,10 @@ public:
 
 class MockBatteryManager : public virtual bms::BatteryManager {
 public:
-    MOCK_METHOD(float, getStateOfCharge, (), (const, override));
-    MOCK_METHOD(bool, detectFaults, (), (override));
-    MOCK_METHOD(void, simulateFault, (FaultType fault));
+    virtual ~MockBatteryManager() = default;
+    MOCK_METHOD(float, getStateOfCharge, (), (const));
+    MOCK_METHOD(bool, detectFaults, ());
+    MOCK_METHOD(void, simulateFault, (diagnostics::FaultType fault));
 };
 
 class MockMotorController : public motor::MotorController {
@@ -60,9 +62,9 @@ public:
 
 class MockSensorManager : public sensors::SensorManager {
 public:
-    MOCK_METHOD(void, updateSensorData, (), (override));
-    MOCK_METHOD(bool, registerSensor, (const std::string& name, SensorType type), (override));
-    MOCK_METHOD(sensors::SensorData, getFusedData, (), (const, override));
+    MOCK_METHOD(void, updateSensorData, ());
+    MOCK_METHOD(bool, registerSensor, (const std::string& name, sensors::SensorType type));
+    MOCK_METHOD(sensors::SensorData, getFusedData, (), (const));
     MOCK_METHOD(void, simulateObstacle, (float distance));
 };
 
@@ -77,6 +79,12 @@ public:
     MOCK_METHOD(diagnostics::SystemHealth, getSystemHealth, (), (const, override));
     MOCK_METHOD(void, updateDiagnostics, (), (override));
     MOCK_METHOD(std::vector<diagnostics::Fault>, getActiveFaults, (), (const, override));
+};
+
+class MockFaultDetector {
+public:
+    MOCK_METHOD(void, simulateFault, (diagnostics::FaultType fault));
+    MOCK_METHOD(void, clearFault, (diagnostics::FaultType fault));
 };
 
 } // namespace tests

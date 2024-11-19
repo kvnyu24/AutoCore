@@ -6,16 +6,11 @@
 #include "../../sensors/fusion_types.hpp"
 #include "../../vcs/vehicle_control_system.hpp"
 #include "../../sensors/sensor_types.hpp"
-
+#include "../../common/types.hpp"
 namespace autocore {
 namespace autonomous {
 
-struct SceneContext {
-    std::chrono::system_clock::time_point timestamp;
-    std::vector<sensors::TrackedObject> objects;
-    vcs::VehicleState currentState;
-    NavigationGoal goal;
-};
+using common::SceneContext;
 
 struct BehaviorState {
     Maneuver maneuver;
@@ -23,6 +18,7 @@ struct BehaviorState {
     float riskLevel{0.0f};
     bool isValid{true};
 };
+
 
 struct PredictedBehavior {
     sensors::TrackedObject object;

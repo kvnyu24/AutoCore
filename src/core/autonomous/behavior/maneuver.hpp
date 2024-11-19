@@ -3,6 +3,7 @@
 #include <vector>
 #include "../planning/trajectory_planner.hpp"
 #include "../../sensors/sensor_types.hpp"
+#include "scene_types.hpp"
 
 namespace autocore {
 namespace autonomous {

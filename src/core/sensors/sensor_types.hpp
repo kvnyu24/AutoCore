@@ -49,6 +49,7 @@ struct StateEstimate {
     std::vector<float> orientation;
     std::vector<float> angularVelocity;
     float uncertainty;
+    std::chrono::system_clock::time_point timestamp;
 };
 
 } // namespace sensors

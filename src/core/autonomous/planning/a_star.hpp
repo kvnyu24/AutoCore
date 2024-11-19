@@ -2,10 +2,13 @@
 
 #include "../../common/types.hpp"
 #include "../types.hpp"
+#include "../../sensors/sensor_types.hpp"
 #include <vector>
 
 namespace autocore {
 namespace autonomous {
+
+using common::Position;
 
 class AStar {
 public:

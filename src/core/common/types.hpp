@@ -58,6 +58,21 @@ struct Path {
     std::vector<float> timestamps;
 };
 
+struct DiagnosticData {
+    // Consolidated diagnostic data definition
+};
+
+struct SceneContext {
+    std::chrono::system_clock::time_point timestamp;
+    std::vector<sensors::TrackedObject> objects;
+    vcs::VehicleState currentState;
+    NavigationGoal goal;};
+};
+
+struct PredictedBehavior {
+    // Consolidated behavior prediction definition
+};
+
 // Type aliases for backward compatibility
 namespace sensors {
     using Position = common::Position;
