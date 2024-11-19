@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <memory>
-#include "position.hpp"
-
+#include <string>
+#include "../../common/types.hpp"
 namespace autocore {
 namespace sensors {
 
@@ -20,6 +20,14 @@ struct MapFeature {
 };
 
 class Map {
+private:
+    std::vector<MapFeature> features_;
+    std::vector<Position> trajectoryHistory_;
+    
+    // Internal methods
+    void pruneOldFeatures();
+    void updateUncertainties();
+
 public:
     Map() = default;
     ~Map() = default;
@@ -37,14 +45,6 @@ public:
     void clear();
     void optimize();
     void merge(const Map& other);
-
-private:
-    std::vector<MapFeature> features_;
-    std::vector<Position> trajectoryHistory_;
-    
-    // Internal methods
-    void pruneOldFeatures();
-    void updateUncertainties();
 };
 
 } // namespace sensors

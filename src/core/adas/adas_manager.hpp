@@ -7,7 +7,7 @@
 #include "../perception_system.hpp"
 #include "path_planner.hpp"
 #include "decision_maker.hpp"
-
+#include "../common/types.hpp"
 namespace autocore {
 namespace adas {
 

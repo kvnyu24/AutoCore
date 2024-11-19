@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../types.hpp"
-#include "../../sensors/position.hpp"
+#include "../../common/types.hpp"
 #include "../../sensors/fusion_types.hpp"
 #include "a_star.hpp"
 #include <vector>

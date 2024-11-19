@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../sensors/position.hpp"
+#include "../../common/types.hpp"
+#include "../types.hpp"
 #include <vector>
 
 namespace autocore {

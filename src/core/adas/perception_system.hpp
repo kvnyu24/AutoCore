@@ -3,6 +3,7 @@
 #include <memory>
 #include <future>
 #include <opencv2/core.hpp>
+#include "../common/types.hpp"
 #include "../sensors/sensor_manager.hpp"
 #include "../sensors/fusion_engine.hpp"
 #include "../sensors/sensor_types.hpp"

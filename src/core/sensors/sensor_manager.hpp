@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include "sensor_types.hpp"
+#include "../common/types.hpp"
 #include "calibration_manager.hpp"
 #include "fusion_engine.hpp"
 #include "sensor.hpp"

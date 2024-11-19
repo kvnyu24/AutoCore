@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "component_health.hpp"
+#include "fault_detector.hpp"
 
 namespace autocore {
 namespace diagnostics {

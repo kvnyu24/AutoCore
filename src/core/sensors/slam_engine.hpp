@@ -3,7 +3,7 @@
 #include <vector>
 #include "sensor_data.hpp"
 #include "map.hpp"
-#include "position.hpp"
+#include "../common/types.hpp"
 
 namespace autocore {
 namespace sensors {

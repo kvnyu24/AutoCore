@@ -1,10 +1,10 @@
-
 #pragma once
 
 #include <vector>
+#include <chrono>
 
 namespace autocore {
-namespace sensors {
+namespace common {
 
 struct Position {
     float x;
@@ -40,5 +40,41 @@ struct Position {
     }
 };
 
-} // namespace sensors
+enum class ObjectType {
+    VEHICLE,
+    PEDESTRIAN,
+    CYCLIST,
+    UNKNOWN
+};
+
+struct Velocity {
+    float vx{0.0f};
+    float vy{0.0f};
+    float vz{0.0f};
+};
+
+struct Path {
+    std::vector<Position> waypoints;
+    std::vector<float> timestamps;
+};
+
+} // namespace common
+
+// Type aliases for backward compatibility
+namespace sensors {
+    using Position = common::Position;
+    using Velocity = common::Velocity;
+    using Path = common::Path;
+}
+
+namespace autonomous {
+    using Position = common::Position;
+    using ObjectType = common::ObjectType;
+}
+
+namespace adas {
+    using Position = common::Position;
+    using ObjectType = common::ObjectType;
+}
+} // namespace common
 } // namespace autocore

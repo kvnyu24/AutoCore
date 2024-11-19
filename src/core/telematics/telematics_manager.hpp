@@ -8,7 +8,7 @@
 #include "cloud_connector.hpp"
 #include "ota_manager.hpp"
 #include "../sensors/sensor_types.hpp"
-#include "../sensors/position.hpp"
+#include "../common/types.hpp"
 #include "telematics_types.hpp"
 
 namespace autocore {

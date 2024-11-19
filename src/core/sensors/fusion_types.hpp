@@ -1,7 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "position.hpp"
+#include "../common/types.hpp"
+#include "kalman_filter.hpp"
 
 namespace autocore {
 namespace sensors {
@@ -29,18 +30,6 @@ struct TrackedObject {
     TrackedObject(const Feature& feature) {
         // Initialize from feature
     }
-};
-
-template<typename State, typename Measurement>
-class KalmanFilter {
-public:
-    void predict();
-    void update(const Measurement& measurement);
-    State getState() const;
-    
-private:
-    State state_;
-    // Add Kalman filter implementation details
 };
 
 } // namespace sensors

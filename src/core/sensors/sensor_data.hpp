@@ -3,9 +3,12 @@
 #include <vector>
 #include <chrono>
 #include "fusion_types.hpp"
-
+#include "../common/types.hpp"
 namespace autocore {
 namespace sensors {
+
+// Forward declaration
+struct TrackedObject;
 
 enum class SensorType {
     LIDAR,
@@ -41,7 +44,7 @@ struct StateEstimate {
     std::vector<float> acceleration;
     std::vector<float> orientation;
     std::vector<float> angularVelocity;
-    std::vector<TrackedObject> trackedObjects; 
+    std::vector<TrackedObject*> trackedObjects;
     std::chrono::system_clock::time_point timestamp;
 };
 

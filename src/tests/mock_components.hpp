@@ -13,21 +13,38 @@
 namespace autocore {
 namespace tests {
 
-class MockFusionEngine : public sensors::FusionEngine {
+// Base interface for FusionEngine
+class IFusionEngine {
+public:
+    virtual ~IFusionEngine() = default;
+    virtual void updateFusion() = 0;
+    virtual void setFusionParameters(const sensors::FusionParameters& params) = 0;
+};
+
+// Base interface for SLAMEngine
+class ISLAMEngine {
+public:
+    virtual ~ISLAMEngine() = default;
+    virtual void updateMap() = 0;
+    virtual std::vector<sensors::Feature> detectFeatures(const sensors::SensorData& data) = 0;
+    virtual void trackFeatures(const std::vector<sensors::Feature>& features) = 0;
+};
+
+// Mock implementations
+class MockFusionEngine : public IFusionEngine {
 public:
     MOCK_METHOD(void, updateFusion, (), (override));
     MOCK_METHOD(void, setFusionParameters, (const sensors::FusionParameters& params), (override));
-    MOCK_METHOD(void, simulateObstacle, (const sensors::Position& position));
 };
 
-class MockSLAMEngine : public sensors::SLAMEngine {
+class MockSLAMEngine : public ISLAMEngine {
 public:
     MOCK_METHOD(void, updateMap, (), (override));
     MOCK_METHOD(std::vector<sensors::Feature>, detectFeatures, (const sensors::SensorData& data), (override));
     MOCK_METHOD(void, trackFeatures, (const std::vector<sensors::Feature>& features), (override));
 };
 
-class MockBatteryManager : public bms::BatteryManager {
+class MockBatteryManager : public virtual bms::BatteryManager {
 public:
     MOCK_METHOD(float, getStateOfCharge, (), (const, override));
     MOCK_METHOD(bool, detectFaults, (), (override));

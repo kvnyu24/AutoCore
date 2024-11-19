@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../core/autonomous/behavior/behavior_planner.hpp"
+#include "../core/autonomous/behavior/scene_context.hpp"
 #include "mock_components.hpp"
 
 using namespace autocore::sensors;

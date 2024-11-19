@@ -13,11 +13,11 @@ namespace sensors {
  * Implements a discrete-time Kalman filter for optimal state estimation
  * of linear systems with Gaussian noise.
  */
-template<typename T = double>
+template<typename State, typename Measurement = State>
 class KalmanFilter {
 public:
-    using Matrix = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>;
-    using Vector = Eigen::Matrix<T, Eigen::Dynamic, 1>;
+    using Matrix = Eigen::Matrix<State, Eigen::Dynamic, Eigen::Dynamic>;
+    using Vector = Eigen::Matrix<State, Eigen::Dynamic, 1>;
 
     KalmanFilter();
     ~KalmanFilter() = default;

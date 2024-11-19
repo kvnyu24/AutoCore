@@ -5,6 +5,9 @@
 #include "../../sensors/slam_engine.hpp"
 #include "behavior_state.hpp"
 #include "maneuver.hpp"
+#include "scene_context.hpp"
+#include "behavior_state.hpp"
+#include "../common/types.hpp"
 
 namespace autocore {
 namespace autonomous {
