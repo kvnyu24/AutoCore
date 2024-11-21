@@ -9,6 +9,10 @@
 #include "decision_maker.hpp"
 #include "../common/types.hpp"
 namespace autocore {
+namespace sensors { class SensorManager; }
+namespace motor { class MotorController; }
+namespace vcs { class VehicleControlSystem; }
+
 namespace adas {
 
 enum class ADASFeatureState {

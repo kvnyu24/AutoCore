@@ -2,8 +2,22 @@
 
 #include <vector>
 #include <chrono>
+#include "../autonomous/behavior/maneuver.hpp"
+#include "../sensors/fusion_types.hpp"
+#include "../vcs/vehicle_control_system.hpp"
 
 namespace autocore {
+namespace vcs {
+    struct VehicleState;
+}
+namespace autonomous {
+    struct NavigationGoal;
+}
+namespace sensors {
+    struct TrackedObject;  // Forward declaration
+}
+
+
 namespace common {
 
 struct Position {
@@ -59,14 +73,19 @@ struct Path {
 };
 
 struct DiagnosticData {
-    // Consolidated diagnostic data definition
+    float temperature;
+    float voltage;
+    float current;
+    std::chrono::system_clock::time_point timestamp;
+    std::vector<float> sensorReadings;
+    bool isValid{true};
 };
 
 struct SceneContext {
     std::chrono::system_clock::time_point timestamp;
     std::vector<sensors::TrackedObject> objects;
     vcs::VehicleState currentState;
-    NavigationGoal goal;};
+    autonomous::NavigationGoal goal;
 };
 
 struct PredictedBehavior {

@@ -4,9 +4,12 @@
 #include <vector>
 #include "diagnostic_data.hpp"
 #include "../ml/anomaly_detector.hpp"
+#include "../common/types.hpp"
 
 namespace autocore {
 namespace diagnostics {
+
+using common::DiagnosticData;
 
 enum class FaultType {
     TEMPERATURE_WARNING,
@@ -37,7 +40,8 @@ struct Fault {
     bool operator==(const Fault& other) const {
         return type == other.type && 
                timestamp == other.timestamp &&
-               severity == other.severity;
+               severity == other.severity &&
+               description == other.description;
     }
 };
 
@@ -46,6 +50,19 @@ struct FaultPattern {
     std::chrono::milliseconds timeWindow;
     FaultSeverity resultingSeverity;
     std::string description;
+};
+
+struct TemporalFaultAnalysis {
+    std::deque<Fault> recentFaults;
+    std::chrono::seconds analysisWindow{3600}; // 1 hour default
+    size_t maxFaultHistory{100};
+    
+    struct PatternMatch {
+        FaultPattern pattern;
+        std::chrono::system_clock::time_point firstOccurrence;
+        int occurrences{0};
+    };
+    std::map<std::string, PatternMatch> activePatterns;
 };
 
 class FaultDetector {
@@ -72,9 +89,14 @@ private:
     float VOLTAGE_MIN_THRESHOLD{280.0f};
     float VOLTAGE_MAX_THRESHOLD{400.0f};
 
+    TemporalFaultAnalysis temporalAnalysis_;
+    
     void initializeFaultPatterns();
     void loadMachineLearningModel();
     void processFaults(std::vector<Fault>& faults);
+    void analyzeTemporalPatterns(const DiagnosticData& data);
+    void escalateSeverity(std::vector<Fault>& faults);
+    bool matchesTemporalPattern(const FaultType& faultType, const FaultPattern& pattern);
 };
 
 } // namespace diagnostics

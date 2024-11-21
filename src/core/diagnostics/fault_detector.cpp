@@ -1,13 +1,24 @@
 #include "fault_detector.hpp"
 #include <algorithm>
 #include <cmath>
+#include <deque>
+#include <chrono>
+#include <map>
+#include "common/types.hpp"
 
 namespace autocore {
 namespace diagnostics {
+namespace ml {
+// ML namespace content
+}
 
 FaultDetector::FaultDetector() : mlModel_(std::make_unique<ml::AnomalyDetector>()) {
     initializeFaultPatterns();
     loadMachineLearningModel();
+    
+    // Initialize temporal analysis
+    temporalAnalysis_.analysisWindow = std::chrono::seconds(3600);
+    temporalAnalysis_.maxFaultHistory = 100;
 }
 
 std::vector<Fault> FaultDetector::detectFaults(const DiagnosticData& data) {
@@ -21,6 +32,12 @@ std::vector<Fault> FaultDetector::detectFaults(const DiagnosticData& data) {
     
     // Pattern matching
     detectPatternBasedFaults(data, detectedFaults);
+    
+    // New temporal analysis
+    analyzeTemporalPatterns(data);
+    
+    // Escalate severity based on patterns
+    escalateSeverity(detectedFaults);
     
     // Prioritize and deduplicate faults
     processFaults(detectedFaults);
@@ -126,6 +143,66 @@ void FaultDetector::loadMachineLearningModel() {
     // Load and initialize ML model
     mlModel_->loadModel("path/to/model");
     // Configure model parameters as needed
+}
+
+void FaultDetector::analyzeTemporalPatterns(const DiagnosticData& data) {
+    // Add current faults to history
+    for (const auto& fault : temporalAnalysis_.recentFaults) {
+        if (temporalAnalysis_.recentFaults.size() >= temporalAnalysis_.maxFaultHistory) {
+            temporalAnalysis_.recentFaults.pop_front();
+        }
+        temporalAnalysis_.recentFaults.push_back(fault);
+    }
+    
+    // Analyze patterns
+    for (const auto& pattern : faultPatterns_) {
+        bool patternFound = true;
+        auto currentTime = data.timestamp;
+        
+        for (const auto& requiredFault : pattern.sequence) {
+            if (!matchesTemporalPattern(requiredFault, pattern)) {
+                patternFound = false;
+                break;
+            }
+        }
+        
+        if (patternFound) {
+            auto& match = temporalAnalysis_.activePatterns[pattern.description];
+            match.pattern = pattern;
+            match.occurrences++;
+            
+            if (match.occurrences == 1) {
+                match.firstOccurrence = currentTime;
+            }
+        }
+    }
+}
+
+void FaultDetector::escalateSeverity(std::vector<Fault>& faults) {
+    for (auto& fault : faults) {
+        // Check for repeated occurrences
+        int occurrences = std::count_if(
+            temporalAnalysis_.recentFaults.begin(),
+            temporalAnalysis_.recentFaults.end(),
+            [&](const Fault& f) { return f.type == fault.type; }
+        );
+        
+        // Escalate severity based on frequency
+        if (occurrences > 5 && fault.severity != FaultSeverity::CRITICAL) {
+            fault.severity = static_cast<FaultSeverity>(
+                std::min(static_cast<int>(FaultSeverity::CRITICAL),
+                        static_cast<int>(fault.severity) + 1)
+            );
+        }
+    }
+}
+
+bool FaultDetector::matchesTemporalPattern(const FaultType& faultType, const FaultPattern& pattern) {
+    return std::any_of(temporalAnalysis_.recentFaults.begin(),
+                      temporalAnalysis_.recentFaults.end(),
+                      [&](const Fault& fault) {
+                          return fault.type == faultType;
+                      });
 }
 
 } // namespace diagnostics
