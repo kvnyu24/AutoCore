@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../common/types.hpp"
-
 #include "../sensors/sensor_types.hpp"
 #include <vector>
 #include <chrono>

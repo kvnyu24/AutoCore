@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 #include "../sensors/sensor_types.hpp"
-#include "../sensors/position.hpp"
 #include "perception_system.hpp"
 
 namespace autocore {

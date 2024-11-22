@@ -7,7 +7,7 @@
 #include "../sensors/sensor_manager.hpp"
 #include "../sensors/fusion_engine.hpp"
 #include "../sensors/sensor_types.hpp"
-#include "../sensors/fusion_types.hpp"
+#include "../sensors/sensor_types.hpp"
 #include "path_planner.hpp"
 
 namespace autocore {

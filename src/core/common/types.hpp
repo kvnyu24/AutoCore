@@ -3,8 +3,6 @@
 #include <vector>
 #include <chrono>
 #include <string>
-#include "../sensors/fusion_types.hpp"
-#include "../vcs/vehicle_control_system.hpp"
 
 namespace autocore {
     namespace vcs {
@@ -88,16 +86,16 @@ namespace autocore {
             bool isValid{true};
         };
 
-        struct SceneContext {
-            std::chrono::system_clock::time_point timestamp;
-            std::vector<autocore::sensors::TrackedObject> objects;
-            vcs::VehicleState currentState;
-            autocore::autonomous::NavigationGoal goal;
-        };
+        // struct SceneContext {
+        //     std::chrono::system_clock::time_point timestamp;
+        //     std::vector<autocore::sensors::TrackedObject> objects;
+        //     vcs::VehicleState currentState;
+        //     autocore::autonomous::NavigationGoal goal;
+        // };
 
-        struct PredictedBehavior {
-            // Consolidated behavior prediction definition
-        };
+        // struct PredictedBehavior {
+        //     // Consolidated behavior prediction definition
+        // };
     } // namespace common
 
 } // namespace autocore

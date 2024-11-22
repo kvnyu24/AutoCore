@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "kalman_filter.hpp"
-#include "fusion_types.hpp"
+#include "sensor_types.hpp"
 
 namespace autocore {
 namespace sensors {

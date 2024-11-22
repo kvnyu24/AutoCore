@@ -1,6 +1,7 @@
 #include "preprocessor.hpp"
 #include <algorithm>
 #include <cmath>
+#include "sensor_types.hpp"
 
 namespace autocore {
 namespace sensors {

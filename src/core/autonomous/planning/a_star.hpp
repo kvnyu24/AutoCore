@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../common/types.hpp"
-#include "../types.hpp"
+#include "../autonomous_types.hpp"
 #include "../../sensors/sensor_types.hpp"
 #include <vector>
 
@@ -12,9 +12,9 @@ using common::Position;
 
 class AStar {
 public:
-    std::vector<sensors::Position> findPath(
-        const sensors::Position& start,
-        const sensors::Position& goal,
+    std::vector<Position> findPath(
+        const Position& start,
+        const Position& goal,
         const std::vector<Obstacle>& obstacles);
         
 private:

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "../../sensors/fusion_engine.hpp"
 #include "a_star.hpp"
+#include "../autonomous_types.hpp"
 
 namespace autocore {
 namespace autonomous {
@@ -16,8 +17,8 @@ TrajectoryPlanner::TrajectoryPlanner(
 }
 
 Trajectory TrajectoryPlanner::planTrajectory(
-    const sensors::Position& currentPos,
-    const sensors::Position& destination,
+    const Position& currentPos,
+    const Position& destination,
     const std::vector<Obstacle>& obstacles) {
     
     // Get current state estimate from fusion engine
@@ -42,8 +43,8 @@ Trajectory TrajectoryPlanner::planTrajectory(
 }
 
 std::vector<Waypoint> TrajectoryPlanner::generateWaypoints(
-    const sensors::Position& start,
-    const sensors::Position& end) {
+    const Position& start,
+    const Position& end) {
     
     std::vector<Waypoint> waypoints;
     

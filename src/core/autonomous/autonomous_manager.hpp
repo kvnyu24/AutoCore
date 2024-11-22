@@ -6,8 +6,8 @@
 #include "../vcs/vehicle_control_system.hpp"
 #include "planning/trajectory_planner.hpp"
 #include "behavior/behavior_planner.hpp"
-#include "../localization/localization_system.hpp"
-
+// #include "../localization/localization_system.hpp"
+#include "autonomous_types.hpp"
 namespace autocore {
 namespace autonomous {
 

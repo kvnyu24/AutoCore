@@ -3,14 +3,15 @@
 #include <chrono>
 #include <vector>
 #include "maneuver.hpp"
-#include "../../sensors/fusion_types.hpp"
 #include "../../vcs/vehicle_control_system.hpp"
 #include "../../sensors/sensor_types.hpp"
 #include "../../common/types.hpp"
+#include "../autonomous_types.hpp"
+
 namespace autocore {
 namespace autonomous {
 
-using common::SceneContext;
+using autonomous::SceneContext;
 
 struct BehaviorState {
     Maneuver maneuver;

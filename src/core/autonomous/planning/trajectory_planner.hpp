@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../types.hpp"
-#include "../../sensors/fusion_types.hpp"
+#include "../autonomous_types.hpp"
+#include "../../sensors/sensor_types.hpp"
 #include "a_star.hpp"
 #include <vector>
 
@@ -40,14 +40,14 @@ public:
 
     // Core trajectory planning
     Trajectory planTrajectory(
-        const sensors::Position& currentPos,
-        const sensors::Position& destination,
+        const Position& currentPos,
+        const Position& destination,
         const std::vector<Obstacle>& obstacles);
 
     // Waypoint generation
     std::vector<Waypoint> generateWaypoints(
-        const sensors::Position& start,
-        const sensors::Position& end);
+        const Position& start,
+        const Position& end);
 
     // Trajectory validation and optimization
     bool validateTrajectory(
@@ -74,7 +74,7 @@ private:
 
     // Internal methods
     void initializePlanner();
-    std::vector<Waypoint> smoothPath(const std::vector<sensors::Position>& path);
+    std::vector<Waypoint> smoothPath(const std::vector<Position>& path);
     float calculateOptimalSpeed(
         const std::vector<Waypoint>& waypoints,
         const std::vector<Obstacle>& obstacles);
