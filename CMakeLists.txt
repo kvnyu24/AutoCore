@@ -25,6 +25,7 @@ target_link_libraries(behavior_planner_test
 )
 
 target_include_directories(behavior_planner_test PRIVATE
+    ${PROJECT_SOURCE_DIR}/src/core/common
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/src/core
     ${PROJECT_SOURCE_DIR}/src/core/sensors

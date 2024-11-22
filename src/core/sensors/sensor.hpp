@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sensor_types.hpp"
-#include "sensor_data.hpp"
 
 namespace autocore {
 namespace sensors {

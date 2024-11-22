@@ -4,7 +4,7 @@
 #include "../sensors/sensor_manager.hpp"
 #include "../motor/motor_controller.hpp"
 #include "../vcs/vehicle_control_system.hpp"
-#include "../perception_system.hpp"
+#include "perception_system.hpp"
 #include "path_planner.hpp"
 #include "decision_maker.hpp"
 #include "../common/types.hpp"

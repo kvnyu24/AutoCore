@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "sensor_data.hpp"
 #include "kalman_filter.hpp"
 #include "fusion_types.hpp"
 

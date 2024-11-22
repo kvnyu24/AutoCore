@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include "../common/types.hpp"
+#include "sensor_types.hpp"
 namespace autocore {
 namespace sensors {
 

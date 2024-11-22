@@ -2,7 +2,7 @@
 
 #include <Eigen/Dense>
 #include <stdexcept>
-#include "sensor_data.hpp"
+#include "sensor_types.hpp"
 
 namespace autocore {
 namespace sensors {

@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <string>
 #include "sensor_types.hpp"
-#include "sensor_data.hpp"
 #include "../common/types.hpp"
 
 namespace autocore {
